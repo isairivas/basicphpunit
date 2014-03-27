@@ -1,10 +1,26 @@
 <?xml version="1.0" ?>
-<project  name="user"  basedir="." >
-    <exec executable="phpunit" failonerror="true">
-        <arg line="UnitTest UserTest.php" />
-    </exec>
-    <copy file="User.php" tofile="builds/User.php" />
-    <target name="deployment" description="">
-        
+
+<project  name="user" default="deploy-copy"  basedir="." >
+    
+    <property name="Production.dir" value="/var/www/p/basicphpunit" />
+    <property name="Dev.dir" value="/var/www/t/basicphpunit" />
+    
+    <target name="deploy-clean" description="limpiar la carpeta de deploy">
+        <delete includeemptydirs="true" failonerror="false">
+            <fileset dir="${Production.dir}" >
+                <exclude name="**/builds/app.config.ini" />
+            </fileset>
+        </delete>
+        <echo message="limpiado" />
     </target>
+    
+    <target name="deploy-copy" depends="deploy-clean" description="copia el codigo resultante a produccion" >
+        <mkdir dir="${Production.dir}" />
+        <copy todir="${Production.dir}" > 
+            <fileset dir="${Dev.dir}" >
+                <exclude name="**/nbproject/**" />
+            </fileset>
+        </copy>
+    </target>
+    
 </project>

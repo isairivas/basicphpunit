@@ -1,7 +1,7 @@
 <?php
 require_once 'User.php';
 $user = new User();
-$user->setName("isai");
+$user->setName("que paso muchacho");
 ?>
 <!DOCTYPE html>
 <html>
