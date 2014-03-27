@@ -4,4 +4,7 @@
         <arg line="UnitTest UserTest.php" />
     </exec>
     <copy file="User.php" tofile="builds/User.php" />
+    <target name="deployment" description="">
+        
+    </target>
 </project>
