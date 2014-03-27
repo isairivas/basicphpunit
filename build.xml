@@ -21,6 +21,7 @@
                 <exclude name="**/nbproject/**" />
             </fileset>
         </copy>
+        <echo message="Todo bien ${nombre} " />
     </target>
     
 </project>
