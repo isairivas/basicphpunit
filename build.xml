@@ -2,26 +2,28 @@
 
 <project  name="user" default="deploy-copy"  basedir="." >
     
-    <property name="Production.dir" value="/var/www/p/basicphpunit" />
-    <property name="Dev.dir" value="/var/www/t/basicphpunit" />
-    
+    <!--
+    Propiedades necesarias (enviarlas por argumentos o conf jenkins )
+        - production.path # el path del webroot donde de desplegara la app
+        - build.path  # el directorio donde esta el build que cargara la app
+    -->
     <target name="deploy-clean" description="limpiar la carpeta de deploy">
         <delete includeemptydirs="true" failonerror="false">
-            <fileset dir="${Production.dir}" >
-                <exclude name="**/builds/app.config.ini" />
+            <fileset dir="${production.path}" >
+                <!-- archivo de configuracion que no se eliminara -->
+                <exclude name="**/builds/app.config.ini" /> 
             </fileset>
         </delete>
         <echo message="limpiado" />
     </target>
     
     <target name="deploy-copy" depends="deploy-clean" description="copia el codigo resultante a produccion" >
-        <mkdir dir="${Production.dir}" />
-        <copy todir="${Production.dir}" > 
-            <fileset dir="${Dev.dir}" >
+        <mkdir dir="${production.path}" />
+        <copy todir="${production.path}" > 
+            <fileset dir="${build.path}" >
                 <exclude name="**/nbproject/**" />
             </fileset>
-        </copy>
-        <echo message="Todo bien ${nombre} " />
+        </copy>    
     </target>
     
 </project>
